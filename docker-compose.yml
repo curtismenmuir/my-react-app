@@ -1,0 +1,17 @@
+version: "3.4"
+services:
+  my-app:
+    build: 
+      context: .
+    ports: 
+      - 3000:3000
+    volumes:
+      - type: bind
+        source: $PWD/public
+        target: /usr/app/public
+      - type: bind
+        source: $PWD/src
+        target: /usr/app/src
+    environment: 
+      - PORT=3000
+    restart: on-failure

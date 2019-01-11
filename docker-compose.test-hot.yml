@@ -1,0 +1,15 @@
+version: "3.4"
+services:
+  my-app:
+    build: 
+      context: .
+    command: /bin/bash -c "inotifywait -m -r --exclude .git -e close_write public src | yarn test"
+    environment: 
+      - PORT=3000
+    volumes:
+      - type: bind
+        source: $PWD/public
+        target: /usr/app/public
+      - type: bind
+        source: $PWD/src
+        target: /usr/app/src
